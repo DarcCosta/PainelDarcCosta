@@ -1,8 +1,9 @@
-<title>Painel Ressarcimento Tokio</title>
+<!doctype html>
+<html><head><title>Painel Ressarcimento Tokio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -668,7 +669,7 @@
   footer strong { color: var(--text); font-weight: 600; }
 </style>
 
-<main>
+</head><body><main>
   <div class="masthead">
     <div>
       <p class="kicker">Darc Advocacia · Ressarcimento</p>
@@ -676,12 +677,12 @@
     </div>
     <div class="side">
       <button class="update-btn" id="update-btn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
         Atualizar planilha
       </button>
       <input type="file" id="file-input" accept=".xlsx,.xlsm" style="display:none">
       <button class="update-btn secondary" id="save-btn" type="button" title="Baixa uma cópia deste painel com os dados atuais, para você substituir o arquivo salvo no seu computador">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path></svg>
         Salvar arquivo
       </button>
       <div class="meta">
@@ -692,7 +693,7 @@
     </div>
   </div>
 
-  <section class="gh-panel" id="gh-panel" hidden>
+  <section class="gh-panel" id="gh-panel" hidden="">
     <h3>Publicar automaticamente no GitHub Pages</h3>
     <p class="hint">
       Preencha uma vez com os dados do seu repositório e um token de acesso pessoal do GitHub (só com permissão de leitura/escrita de conteúdo nesse repositório). Isso fica guardado apenas neste navegador — nunca é salvo no arquivo nem enviado a ninguém além do próprio GitHub. Depois disso, todo clique em "Atualizar planilha" publica direto no link do GitHub Pages, sem precisar subir o arquivo manualmente.
@@ -769,6 +770,7 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
   const BOOTSTRAP = {
   "sheetUpdatedAt": "27/08/2026",
   "tokio": {
+    "key": "tokio",
     "title": "Status da Meta — Tokio Marine · Auto",
     "period": "01/08/2026 a 31/08/2026",
     "rows": [
@@ -780,18 +782,21 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       },
       {
         "label": "Pago (Atingido)",
-        "value": 236823.83,
-        "pct": 0.9631879206914082
+        "value": 263373.83,
+        "pct": 1.0711696187086934,
+        "emphasis": false
       },
       {
         "label": "A Vencer",
-        "value": 73154.01,
-        "pct": 0.2975252058973055
+        "value": 46604.009999999995,
+        "pct": 0.1895435078800203,
+        "emphasis": false
       },
       {
         "label": "Estimativa",
         "value": 309977.84,
-        "pct": 1.260713126588714
+        "pct": 1.260713126588714,
+        "emphasis": false
       }
     ],
     "counts": [
@@ -802,22 +807,23 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       },
       {
         "label": "Pagos",
-        "value": 30,
+        "value": 31,
         "tone": "good"
       },
       {
         "label": "Não Pagos",
-        "value": 6,
+        "value": 5,
         "tone": "warn"
       }
     ],
     "diasTexto": "27 de 31 dias",
     "diasPct": 0.8709677419354839,
-    "ritmoNecessario": 2262.792500000003,
-    "ritmoAtual": 8771.252962962963,
+    "ritmoNecessario": 0,
+    "ritmoAtual": 9754.586296296296,
     "status": "No Prazo"
   },
   "pdd": {
+    "key": "pdd",
     "title": "Status do PDD — Reacordos (Inadimplentes)",
     "period": "01/08/2026 a 31/08/2026",
     "rows": [
@@ -830,22 +836,26 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       {
         "label": "Pago (PDD)",
         "value": 105692.62,
-        "pct": 1.32115775
+        "pct": 1.32115775,
+        "emphasis": false
       },
       {
         "label": "Pago (Ressarcimento)",
         "value": 31132.93,
-        "pct": 0.29456105828391804
+        "pct": 0.29456105828391804,
+        "emphasis": false
       },
       {
         "label": "A Vencer",
         "value": 10458.58,
-        "pct": 0.13073225
+        "pct": 0.13073225,
+        "emphasis": false
       },
       {
         "label": "Estimativa",
         "value": 116151.2,
-        "pct": 1.32115775
+        "pct": 1.32115775,
+        "emphasis": false
       }
     ],
     "counts": [
@@ -868,33 +878,37 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
     "diasTexto": "27 de 31 dias",
     "diasPct": 0.8709677419354839,
     "ritmoNecessario": 0,
-    "ritmoAtual": 3914.541481481481,
+    "ritmoAtual": 3914.5414814814812,
     "status": "No Prazo"
   },
   "total": {
+    "key": "total",
     "title": "Total Geral (Tokio Marine + PDD)",
     "period": "01/08/2026 a 31/08/2026",
     "rows": [
       {
         "label": "Valor Total Geral",
-        "value": 426129.04,
+        "value": 426129.04000000004,
         "pct": 1,
         "emphasis": true
       },
       {
+        "label": "Valor Pago de Primeira Parcela",
+        "value": 35211.18,
+        "pct": 0.09540607118311621,
+        "emphasis": false
+      },
+      {
         "label": "Pago Geral",
-        "value": 342516.45,
-        "pct": 0.8037857499690705
+        "value": 369066.45,
+        "pct": 0.8660908207523241,
+        "emphasis": false
       },
       {
         "label": "A Vencer Geral",
-        "value": 83612.59,
-        "pct": 0.19621425003092963
-      },
-      {
-        "label": "Pago de 1ª Parcela",
-        "value": 23260.18,
-        "pct": 0.06790967265951753
+        "value": 57062.59,
+        "pct": 0.13390917924767576,
+        "emphasis": false
       }
     ],
     "counts": [
@@ -905,15 +919,20 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       },
       {
         "label": "Pagos Geral",
-        "value": 45,
+        "value": 46,
         "tone": "good"
       },
       {
         "label": "Não Pagos Geral",
-        "value": 7,
+        "value": 6,
         "tone": "warn"
       }
-    ]
+    ],
+    "diasTexto": "",
+    "diasPct": 0,
+    "ritmoNecessario": 0,
+    "ritmoAtual": 0,
+    "status": ""
   }
 };
   // BOOTSTRAP:END
@@ -921,7 +940,7 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
   // Timestamp of when this HTML file's BOOTSTRAP data was last baked in
   // (updated by buildFileWithData whenever a new copy is published/saved).
   // PUBLISHED_AT:START
-  const PUBLISHED_AT = "2026-08-27T12:15:10.000Z";
+  const PUBLISHED_AT = "2026-08-27T13:39:14.460Z";
   // PUBLISHED_AT:END
 
   const STORAGE_KEY = 'darc-painel-ressarcimento-tokio:v1';
@@ -1411,4 +1430,4 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
 
   render(currentData);
   document.getElementById('last-read-at').textContent = '—';
-</script>
+</script></body></html>
