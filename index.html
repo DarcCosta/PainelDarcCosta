@@ -179,88 +179,36 @@
   }
   .update-btn.secondary:hover { opacity: 0.85; }
 
-  .gh-toggle {
-    background: none;
-    border: none;
-    padding: 0;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11.5px;
-    color: var(--text-muted);
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-color: var(--border);
-  }
-  .gh-toggle:hover { color: var(--blue); }
-
-  .gh-panel {
+  .save-banner {
     width: 100%;
     max-width: 1180px;
     margin: -8px auto 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 18px 22px;
-  }
-  .gh-panel[hidden] { display: none; }
-  .gh-panel h3 {
-    margin: 0 0 4px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .gh-panel p.hint {
-    margin: 0 0 14px;
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-  .gh-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px 12px;
-  }
-  .gh-grid label {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .gh-grid label.wide { grid-column: 1 / -1; }
-  .gh-grid input {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 13px;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--surface-alt);
-    color: var(--text);
-  }
-  .gh-actions {
-    display: flex;
+    align-items: flex-start;
     gap: 10px;
-    margin-top: 14px;
-    flex-wrap: wrap;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
   }
-  .gh-actions button {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
-    padding: 8px 14px;
-    border-radius: 8px;
+  .save-banner[hidden] { display: none; }
+  .save-banner-icon { flex: none; font-size: 15px; line-height: 1.4; }
+  .save-banner-text { flex: 1; }
+  .save-banner-text strong { color: var(--text); }
+  .save-banner-close {
+    flex: none;
+    background: none;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
     cursor: pointer;
-    border: 1px solid var(--border);
-    background: var(--surface-alt);
-    color: var(--navy);
+    color: var(--text-muted);
+    padding: 0 2px;
   }
-  .gh-actions button.primary { background: var(--navy); color: #F4F7FC; border-color: var(--navy); }
-  .gh-actions button.danger { color: var(--bad); }
-  .gh-status { margin-top: 10px; font-size: 12.5px; color: var(--text-muted); min-height: 16px; }
+  .save-banner-close:hover { color: var(--text); }
 
   /* ---------- Toast ---------- */
 
@@ -656,6 +604,48 @@
   .total-counts .item.good strong { color: var(--good); }
   .total-counts .item.warn strong { color: var(--warn); }
 
+  /* ---------- Próximo mês (prévia) ---------- */
+
+  .next-month-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .next-month-panel .panel-head.next-head {
+    background: var(--surface-alt);
+    color: var(--text);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .next-head .badge-preview {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+
+  .next-head .period { color: var(--text-muted); }
+
+  .next-month-panel .metric-row .label { color: var(--text-muted); }
+
+  .next-note {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
   /* ---------- Footer note ---------- */
 
   footer {
@@ -681,37 +671,22 @@
         Atualizar planilha
       </button>
       <input type="file" id="file-input" accept=".xlsx,.xlsm" style="display:none">
-      <button class="update-btn secondary" id="save-btn" type="button" title="Baixa uma cópia deste painel com os dados atuais, para você substituir o arquivo salvo no seu computador">
+      <button class="update-btn secondary" id="save-btn" type="button" title="Salva uma cópia deste painel com os dados atuais, de preferência direto por cima do arquivo antigo na pasta de rede">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path></svg>
         Salvar arquivo
       </button>
       <div class="meta">
         Dados da planilha atualizados em <strong id="sheet-updated-at">—</strong><br>
-        Última leitura neste link: <strong id="last-read-at">—</strong><br>
-        <button class="gh-toggle" id="gh-toggle" type="button">⚙ Publicação automática (GitHub)</button>
+        Última leitura neste link: <strong id="last-read-at">—</strong>
       </div>
     </div>
   </div>
 
-  <section class="gh-panel" id="gh-panel" hidden="">
-    <h3>Publicar automaticamente no GitHub Pages</h3>
-    <p class="hint">
-      Preencha uma vez com os dados do seu repositório e um token de acesso pessoal do GitHub (só com permissão de leitura/escrita de conteúdo nesse repositório). Isso fica guardado apenas neste navegador — nunca é salvo no arquivo nem enviado a ninguém além do próprio GitHub. Depois disso, todo clique em "Atualizar planilha" publica direto no link do GitHub Pages, sem precisar subir o arquivo manualmente.
-    </p>
-    <div class="gh-grid">
-      <label>Usuário/organização<input type="text" id="gh-owner" placeholder="ex: leonardorios"></label>
-      <label>Repositório<input type="text" id="gh-repo" placeholder="ex: painel-ressarcimento-tokio"></label>
-      <label>Branch<input type="text" id="gh-branch" placeholder="main" value="main"></label>
-      <label>Caminho do arquivo<input type="text" id="gh-path" placeholder="index.html" value="index.html"></label>
-      <label class="wide">Token de acesso pessoal (fine-grained, só com Contents: Read and write neste repositório)<input type="password" id="gh-token" placeholder="github_pat_..."></label>
-    </div>
-    <div class="gh-actions">
-      <button class="primary" id="gh-save" type="button">Salvar configuração</button>
-      <button id="gh-publish-now" type="button">Publicar dados atuais agora</button>
-      <button class="danger" id="gh-clear" type="button">Remover configuração deste navegador</button>
-    </div>
-    <div class="gh-status" id="gh-status"></div>
-  </section>
+  <div class="save-banner" id="save-banner" hidden="">
+    <span class="save-banner-icon">⚠</span>
+    <span class="save-banner-text" id="save-banner-text">Planilha lida. Clique em <strong>Salvar arquivo</strong> e substitua o arquivo antigo na pasta de rede — só assim quem mais abrir o painel vê os dados novos.</span>
+    <button class="save-banner-close" id="save-banner-close" type="button" aria-label="Fechar aviso">×</button>
+  </div>
 
   <div class="grid">
     <section class="panel" id="panel-tokio"></section>
@@ -720,8 +695,10 @@
 
   <section class="total-panel" id="panel-total"></section>
 
+  <section class="next-month-panel" id="panel-next-month"></section>
+
   <footer>
-    Este painel é gerado a partir da planilha <strong>RELAÇÃO ACORDOS.xlsx</strong> (aba "META GRAFICO"). Clique em <strong>Atualizar planilha</strong> e selecione o arquivo mais recente no seu computador (funciona com o arquivo salvo em qualquer pasta, inclusive em unidade de rede) — os dados são lidos direto no seu navegador e o link é republicado para todos que o acessarem. Nada é enviado a servidores externos durante a leitura do arquivo. Se você estiver vendo este painel fora do Claude (arquivo salvo no computador ou publicado no GitHub, por exemplo), depois de atualizar clique também em <strong>Salvar arquivo</strong> e substitua o arquivo antigo pelo baixado — assim, ao reabrir, os dados mais recentes já aparecem de novo.
+    Este painel é gerado a partir da planilha <strong>RELAÇÃO ACORDOS.xlsx</strong> (aba "META GRAFICO") e é um arquivo único, sem servidor por trás — por isso, para que <strong>todo mundo</strong> que abre este arquivo na pasta de rede veja a mesma atualização, é preciso substituir o arquivo depois de atualizar. Passo a passo: 1) clique em <strong>Atualizar planilha</strong> e selecione o Excel mais recente; 2) clique em <strong>Salvar arquivo</strong> — se o navegador permitir, escolha salvar direto por cima do arquivo antigo na pasta de rede; senão, ele vai para a pasta de Downloads e você precisa mover/substituir manualmente o arquivo antigo por esse; 3) quem já tinha o painel aberto precisa recarregar a página (F5) depois da substituição para ver os dados novos. Nada é enviado a servidores externos durante a leitura da planilha.
   </footer>
 </main>
 
@@ -782,32 +759,32 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       },
       {
         "label": "Pago (Atingido)",
-        "value": 216596.83000000002,
-        "pct": 1.0519771242623668,
+        "value": 215203.83000000002,
+        "pct": 1.0452115398625514,
         "emphasis": false
       },
       {
         "label": "A Vencer",
-        "value": 17886.1,
-        "pct": 0.08687000655674008,
+        "value": 13579.1,
+        "pct": 0.06595157726025401,
         "emphasis": false
       },
       {
         "label": "Estimativa",
-        "value": 234482.93000000002,
-        "pct": 1.1388471308191068,
+        "value": 228782.93000000002,
+        "pct": 1.1111631171228054,
         "emphasis": false
       }
     ],
     "counts": [
       {
         "label": "No Período",
-        "value": 21,
+        "value": 20,
         "tone": ""
       },
       {
         "label": "Pagos",
-        "value": 14,
+        "value": 13,
         "tone": "good"
       },
       {
@@ -819,7 +796,7 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
     "diasTexto": "21 de 30 dias",
     "diasPct": 0.7,
     "ritmoNecessario": 0,
-    "ritmoAtual": 10314.134761904763,
+    "ritmoAtual": 10247.801428571429,
     "status": "No Prazo"
   },
   "pdd": {
@@ -888,38 +865,38 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
     "rows": [
       {
         "label": "Valor Total Geral",
-        "value": 323958.64,
+        "value": 318258.64,
         "pct": 1,
         "emphasis": true
       },
       {
         "label": "Valor Pago de Primeira Parcela",
-        "value": 89711.39,
-        "pct": 0.31484051527198503,
+        "value": 89512.39,
+        "pct": 0.31568542235666713,
         "emphasis": false
       },
       {
         "label": "Pago Geral",
-        "value": 284942.33,
-        "pct": 0.8795639159369233,
+        "value": 283549.33,
+        "pct": 0.8909399286064944,
         "emphasis": false
       },
       {
         "label": "A Vencer Geral",
-        "value": 39016.31,
-        "pct": 0.12043608406307668,
+        "value": 34709.31,
+        "pct": 0.1090600713935056,
         "emphasis": false
       }
     ],
     "counts": [
       {
         "label": "Geral",
-        "value": 31,
+        "value": 30,
         "tone": ""
       },
       {
         "label": "Pagos Geral",
-        "value": 22,
+        "value": 21,
         "tone": "good"
       },
       {
@@ -933,6 +910,37 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
     "ritmoNecessario": 0,
     "ritmoAtual": 0,
     "status": ""
+  },
+  "nextMonth": {
+    "label": "Outubro de 2026",
+    "period": "01/10/2026 a 31/10/2026",
+    "tokio": {
+      "total": 108571,
+      "confirmado": 0,
+      "avencer": 108571,
+      "pendente": 0,
+      "count": 2,
+      "countConfirmado": 0,
+      "countAvencer": 2,
+      "countPendente": 0
+    },
+    "pdd": {
+      "total": 0,
+      "confirmado": 0,
+      "avencer": 0,
+      "pendente": 0,
+      "count": 0,
+      "countConfirmado": 0,
+      "countAvencer": 0,
+      "countPendente": 0
+    },
+    "total": 108571,
+    "confirmado": 0,
+    "avencer": 108571,
+    "pendente": 0,
+    "count": 2,
+    "countConfirmado": 0,
+    "countAvencer": 2
   }
 };
   // BOOTSTRAP:END
@@ -940,84 +948,10 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
   // Timestamp of when this HTML file's BOOTSTRAP data was last baked in
   // (updated by buildFileWithData whenever a new copy is published/saved).
   // PUBLISHED_AT:START
-  const PUBLISHED_AT = "2026-09-21T17:33:04.369Z";
+  const PUBLISHED_AT = "2026-09-21T10:50:44.042Z";
   // PUBLISHED_AT:END
 
   const STORAGE_KEY = 'darc-painel-ressarcimento-tokio:v1';
-
-  // ---------- Publicação automática no GitHub (opcional) ----------
-  // Guardado só neste navegador — nunca embutido no arquivo publicado, para
-  // o token nunca acabar exposto no próprio painel ou no repositório.
-  const GITHUB_CONFIG_KEY = 'darc-painel-ressarcimento-tokio:github';
-
-  function loadGithubConfig() {
-    try {
-      const raw = localStorage.getItem(GITHUB_CONFIG_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
-  }
-
-  function saveGithubConfig(cfg) {
-    try { localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(cfg)); } catch (e) { /* storage disabled */ }
-  }
-
-  function clearGithubConfig() {
-    try { localStorage.removeItem(GITHUB_CONFIG_KEY); } catch (e) { /* ignore */ }
-  }
-
-  // Base64 that safely handles UTF-8 (acentos, ç, —, etc.) — plain btoa()
-  // breaks on any character above U+00FF.
-  function b64EncodeUtf8(str) {
-    return btoa(unescape(encodeURIComponent(str)));
-  }
-
-  // Publishes `html` as the configured file's content in the configured
-  // GitHub repo via the REST Contents API, straight from this browser.
-  // Nobody viewing the GitHub Pages link needs this — only the person who
-  // configured a token with write access to that one repository.
-  async function publishToGitHub(html) {
-    const cfg = loadGithubConfig();
-    if (!cfg || !cfg.token || !cfg.owner || !cfg.repo) return { skipped: true };
-
-    const path = (cfg.path || 'index.html').split('/').filter(Boolean).map(encodeURIComponent).join('/');
-    const branch = cfg.branch || 'main';
-    const apiUrl = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/contents/' + path;
-    const headers = { 'Authorization': 'Bearer ' + cfg.token, 'Accept': 'application/vnd.github+json' };
-
-    let sha = null;
-    try {
-      const getResp = await fetch(apiUrl + '?ref=' + encodeURIComponent(branch), { headers });
-      if (getResp.status === 200) {
-        sha = (await getResp.json()).sha;
-      } else if (getResp.status !== 404) {
-        const errBody = await getResp.json().catch(() => ({}));
-        return { ok: false, message: 'GitHub: não consegui acessar o repositório (' + getResp.status + ') — ' + (errBody.message || 'verifique usuário, repositório e token.') };
-      }
-    } catch (e) {
-      return { ok: false, message: 'GitHub: falha de conexão ao verificar o arquivo atual (' + e.message + ').' };
-    }
-
-    const body = {
-      message: 'Atualização automática do painel — ' + new Date().toLocaleString('pt-BR'),
-      content: b64EncodeUtf8(html),
-      branch: branch
-    };
-    if (sha) body.sha = sha;
-
-    try {
-      const putResp = await fetch(apiUrl, { method: 'PUT', headers: Object.assign({ 'Content-Type': 'application/json' }, headers), body: JSON.stringify(body) });
-      if (putResp.status === 200 || putResp.status === 201) {
-        return { ok: true, message: 'GitHub: publicado — o link do GitHub Pages deve refletir os novos dados em cerca de 1 minuto.' };
-      }
-      const errBody = await putResp.json().catch(() => ({}));
-      if (putResp.status === 401) return { ok: false, message: 'GitHub: token inválido ou expirado — gere um novo e atualize a configuração.' };
-      if (putResp.status === 404) return { ok: false, message: 'GitHub: repositório, branch ou caminho do arquivo não encontrados — revise a configuração.' };
-      if (putResp.status === 409) return { ok: false, message: 'GitHub: o arquivo foi alterado por outra publicação ao mesmo tempo — clique em "Publicar dados atuais agora" para tentar de novo.' };
-      return { ok: false, message: 'GitHub recusou a publicação (' + putResp.status + '): ' + (errBody.message || 'erro desconhecido.') };
-    } catch (e) {
-      return { ok: false, message: 'GitHub: falha de conexão ao publicar (' + e.message + ').' };
-    }
-  }
 
   const brl = n => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
   const pct = p => (p * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
@@ -1118,11 +1052,149 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       </div>`;
   }
 
+  // ---------- Próximo mês (prévia do que já está agendado) ----------
+  // A "Meta" (o alvo do mês) é digitada à mão na planilha mês a mês — não
+  // existe ainda para o mês seguinte, então esta seção não compara com meta:
+  // ela só soma o que já está lançado em 'RELAÇÃO SEMANAS' / 'PDD' com
+  // vencimento no mês seguinte ao período atual, usando os mesmos critérios
+  // (SEGURADORA=TOKIO, STATUS=APROVADO, OBS contém NOVO) das fórmulas da
+  // aba META GRAFICO — só que com a janela de datas deslocada em 1 mês.
+
+  const MESES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+  // Excel/SheetJS date serials count from 30/12/1899 (dia 0) — mesma
+  // convenção usada pela planilha (o arquivo é lido com cellDates:false).
+  const EXCEL_EPOCH_UTC = Date.UTC(1899, 11, 30);
+  function dateToExcelSerial(d) {
+    return Math.round((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - EXCEL_EPOCH_UTC) / 86400000);
+  }
+
+  function findHeaderCol(headerRow, name) {
+    const norm = s => String(s == null ? '' : s).trim().toUpperCase().replace(/\s+/g, ' ');
+    const target = norm(name);
+    return headerRow.findIndex(h => norm(h) === target);
+  }
+
+  // Soma/concta as linhas de uma aba (RELAÇÃO SEMANAS ou PDD) cujo
+  // VENCIMENTO cai dentro de [dateFrom, dateTo], replicando os mesmos
+  // critérios das fórmulas SUMIFS/COUNTIFS da aba META GRAFICO.
+  function aggregateSheetForWindow(workbook, sheetName, dateFrom, dateTo) {
+    const empty = { total: 0, confirmado: 0, avencer: 0, pendente: 0, count: 0, countConfirmado: 0, countAvencer: 0, countPendente: 0 };
+    const sn = workbook.SheetNames.find(n => n.trim().toUpperCase() === sheetName.toUpperCase());
+    if (!sn) return empty;
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sn], { header: 1, raw: true, defval: null });
+    const header = rows[1];
+    if (!header) return empty;
+
+    const cSeg = findHeaderCol(header, 'SEGURADORA');
+    const cStatus = findHeaderCol(header, 'STATUS');
+    const cObs = findHeaderCol(header, 'OBS');
+    const cVenc = findHeaderCol(header, 'VENCIMENTO');
+    const cValor = findHeaderCol(header, 'VL TOTAL DO ACORDO');
+    const cStatusPg = findHeaderCol(header, 'STATUS PAGAMENTO');
+    if ([cSeg, cStatus, cObs, cVenc, cValor, cStatusPg].some(i => i === -1)) return empty;
+
+    const fromSerial = dateToExcelSerial(dateFrom);
+    const toSerial = dateToExcelSerial(dateTo);
+    const out = Object.assign({}, empty);
+
+    for (let r = 2; r < rows.length; r++) {
+      const row = rows[r];
+      if (!row) continue;
+      if (String(row[cSeg] || '').toUpperCase().indexOf('TOKIO') === -1) continue;
+      if (String(row[cStatus] || '').toUpperCase().indexOf('APROVADO') === -1) continue;
+      if (String(row[cObs] || '').toUpperCase().indexOf('NOVO') === -1) continue;
+      const venc = row[cVenc];
+      if (typeof venc !== 'number' || venc < fromSerial || venc > toSerial) continue;
+      const valor = row[cValor];
+      if (typeof valor !== 'number') continue;
+
+      out.total += valor;
+      out.count += 1;
+      const statusPg = String(row[cStatusPg] || '').toUpperCase();
+      if (statusPg.indexOf('CONFIRMADO') !== -1) { out.confirmado += valor; out.countConfirmado += 1; }
+      else if (statusPg.indexOf('VENCER') !== -1) { out.avencer += valor; out.countAvencer += 1; }
+      else if (statusPg.indexOf('PENDENTE') !== -1) { out.pendente += valor; out.countPendente += 1; }
+    }
+    return out;
+  }
+
+  function computeNextMonth(workbook, parsed) {
+    try {
+      const periodStr = (parsed.total && parsed.total.period) || (parsed.tokio && parsed.tokio.period) || '';
+      const m = periodStr.match(/(\d{2})\/(\d{2})\/(\d{4})\s*a\s*(\d{2})\/(\d{2})\/(\d{4})/);
+      if (!m) return null;
+      const endDate = new Date(+m[6], +m[5] - 1, +m[4]);
+      const nextStart = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 1);
+      const nextEnd = new Date(endDate.getFullYear(), endDate.getMonth() + 2, 0);
+
+      const tokioAgg = aggregateSheetForWindow(workbook, 'RELAÇÃO SEMANAS', nextStart, nextEnd);
+      const pddAgg = aggregateSheetForWindow(workbook, 'PDD', nextStart, nextEnd);
+      const fmt = d => String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
+
+      return {
+        label: MESES_PT[nextStart.getMonth()] + ' de ' + nextStart.getFullYear(),
+        period: fmt(nextStart) + ' a ' + fmt(nextEnd),
+        tokio: tokioAgg,
+        pdd: pddAgg,
+        total: tokioAgg.total + pddAgg.total,
+        confirmado: tokioAgg.confirmado + pddAgg.confirmado,
+        avencer: tokioAgg.avencer + pddAgg.avencer,
+        pendente: tokioAgg.pendente + pddAgg.pendente,
+        count: tokioAgg.count + pddAgg.count,
+        countConfirmado: tokioAgg.countConfirmado + pddAgg.countConfirmado,
+        countAvencer: tokioAgg.countAvencer + pddAgg.countAvencer
+      };
+    } catch (e) {
+      console.error('computeNextMonth falhou', e);
+      return null;
+    }
+  }
+
+  function nextMonthPanel(d) {
+    const el = document.getElementById('panel-next-month');
+    if (!el) return;
+    if (!d) {
+      el.innerHTML = `
+        <div class="panel-head next-head">
+          <span class="badge-preview">Prévia</span>
+          <h2>Próximo mês</h2>
+          <div class="period">Clique em "Atualizar planilha" para ver o que já está agendado.</div>
+        </div>`;
+      return;
+    }
+    const rows = [
+      { label: 'Total Agendado', value: d.total, emphasis: true },
+      { label: 'Tokio Marine', value: d.tokio.total },
+      { label: 'PDD', value: d.pdd.total },
+      { label: 'Confirmado', value: d.confirmado },
+      { label: 'A Vencer', value: d.avencer },
+      { label: 'Pendente', value: d.pendente }
+    ];
+    const counts = [
+      { label: 'Acordos no Período', value: d.count, tone: '' },
+      { label: 'Confirmados', value: d.countConfirmado, tone: 'good' },
+      { label: 'A Vencer', value: d.countAvencer, tone: 'warn' }
+    ];
+    el.innerHTML = `
+      <div class="panel-head next-head">
+        <span class="badge-preview">Prévia</span>
+        <h2>Próximo Mês — ${d.label}</h2>
+        <div class="period">Período: ${d.period}</div>
+      </div>
+      <div class="panel-body">
+        <div class="metric-table">${rows.map(metricRow).join('')}</div>
+        <div class="chip-row">${counts.map(chip).join('')}</div>
+        <p class="next-note">A meta de ${d.label} ainda não foi cadastrada na planilha — os valores acima mostram apenas o que já está lançado, com vencimento nesse mês, sem comparação com meta.</p>
+      </div>`;
+  }
+
   function render(data) {
     document.getElementById('sheet-updated-at').textContent = data.sheetUpdatedAt || '—';
     panel('panel-tokio', data.tokio);
     panel('panel-pdd', data.pdd);
     totalPanel(data.total);
+    nextMonthPanel(data.nextMonth || null);
   }
 
   // ---------- Toast ----------
@@ -1215,73 +1287,25 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
   const btn = document.getElementById('update-btn');
   const saveBtn = document.getElementById('save-btn');
   const fileInput = document.getElementById('file-input');
-  const ghToggle = document.getElementById('gh-toggle');
-  const ghPanel = document.getElementById('gh-panel');
-  const ghOwner = document.getElementById('gh-owner');
-  const ghRepo = document.getElementById('gh-repo');
-  const ghBranch = document.getElementById('gh-branch');
-  const ghPath = document.getElementById('gh-path');
-  const ghToken = document.getElementById('gh-token');
-  const ghSave = document.getElementById('gh-save');
-  const ghPublishNow = document.getElementById('gh-publish-now');
-  const ghClear = document.getElementById('gh-clear');
-  const ghStatus = document.getElementById('gh-status');
+  const saveBanner = document.getElementById('save-banner');
+  const saveBannerText = document.getElementById('save-banner-text');
+  const saveBannerClose = document.getElementById('save-banner-close');
 
   // Data currently on screen — starts as whatever render() was called with on
   // load, and is kept in sync every time a new spreadsheet is read.
   let currentData = BOOTSTRAP;
 
-  // ---------- GitHub publishing panel ----------
-  (function fillGithubForm() {
-    const cfg = loadGithubConfig();
-    if (!cfg) return;
-    ghOwner.value = cfg.owner || '';
-    ghRepo.value = cfg.repo || '';
-    ghBranch.value = cfg.branch || 'main';
-    ghPath.value = cfg.path || 'index.html';
-    // O token nunca é reexibido por segurança — só é sobrescrito se um novo for digitado.
-    ghStatus.textContent = 'Configuração salva neste navegador para ' + cfg.owner + '/' + cfg.repo + '.';
-  })();
+  saveBannerClose.addEventListener('click', () => { saveBanner.hidden = true; });
 
-  ghToggle.addEventListener('click', () => { ghPanel.hidden = !ghPanel.hidden; });
-
-  ghSave.addEventListener('click', () => {
-    const existing = loadGithubConfig() || {};
-    const cfg = {
-      owner: ghOwner.value.trim(),
-      repo: ghRepo.value.trim(),
-      branch: ghBranch.value.trim() || 'main',
-      path: ghPath.value.trim() || 'index.html',
-      token: ghToken.value.trim() || existing.token || ''
-    };
-    if (!cfg.owner || !cfg.repo || !cfg.token) {
-      ghStatus.textContent = 'Preencha usuário, repositório e token para salvar.';
-      return;
-    }
-    saveGithubConfig(cfg);
-    ghToken.value = '';
-    ghStatus.textContent = 'Configuração salva neste navegador para ' + cfg.owner + '/' + cfg.repo + '. Vai valer a partir do próximo "Atualizar planilha".';
-  });
-
-  ghClear.addEventListener('click', () => {
-    clearGithubConfig();
-    ghOwner.value = ''; ghRepo.value = ''; ghBranch.value = 'main'; ghPath.value = 'index.html'; ghToken.value = '';
-    ghStatus.textContent = 'Configuração removida deste navegador.';
-  });
-
-  ghPublishNow.addEventListener('click', async () => {
-    if (!loadGithubConfig()) { ghStatus.textContent = 'Salve a configuração primeiro.'; return; }
-    ghPublishNow.disabled = true;
-    ghStatus.textContent = 'Publicando…';
-    const result = await publishToGitHub(buildFileWithData(currentData));
-    ghStatus.textContent = result.skipped ? 'Nenhuma configuração encontrada.' : result.message;
-    ghPublishNow.disabled = false;
-  });
+  function showSaveBanner(msg) {
+    if (msg) saveBannerText.innerHTML = msg;
+    saveBanner.hidden = false;
+  }
 
   // Safe feature-detection for the Claude artifact runtime. Outside Claude
-  // (a plain browser tab opening this .html file, or a copy hosted on
-  // GitHub Pages, etc.) the global `claude` object simply doesn't exist —
-  // calling claude.use(...) directly would throw a ReferenceError.
+  // (a plain browser tab opening this .html file, or a copy sitting on a
+  // network/server folder, etc.) the global `claude` object simply doesn't
+  // exist — calling claude.use(...) directly would throw a ReferenceError.
   async function getArtifactCapability() {
     try {
       if (typeof claude !== 'undefined' && claude && typeof claude.use === 'function') {
@@ -1304,11 +1328,11 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       const buf = await file.arrayBuffer();
       const workbook = XLSX.read(buf, { type: 'array', cellDates: false });
       const parsed = parseWorkbook(workbook);
+      parsed.nextMonth = computeNextMonth(workbook, parsed);
 
       render(parsed);
       currentData = parsed;
       document.getElementById('last-read-at').textContent = new Date().toLocaleString('pt-BR');
-      toast('Planilha lida com sucesso.', 'ok');
 
       // Always keep a local copy of the latest reading, so that reopening this
       // exact file in this same browser already shows it — even if it's never
@@ -1317,35 +1341,24 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
         localStorage.setItem(STORAGE_KEY, JSON.stringify({ data: parsed, savedAt: new Date().toISOString() }));
       } catch (e) { /* private/incognito mode or storage disabled — safe to ignore */ }
 
-      const messages = [];
-      let tone = 'ok';
-
       const artifact = await getArtifactCapability();
       if (artifact) {
         btn.textContent = 'Publicando…';
         const newHtml = buildFileWithData(parsed);
         const result = await artifact.publish(newHtml);
         if (result && result.status === 'conflict') {
-          messages.push('Alguém publicou uma versão mais nova ao mesmo tempo neste link do Claude — recarregue a página e tente de novo.');
-          tone = 'err';
+          toast('Alguém publicou uma versão mais nova ao mesmo tempo neste link — recarregue a página e tente de novo.', 'err');
         } else {
-          messages.push('Link do Claude atualizado para todos.');
+          toast('Link atualizado para todos.', 'ok');
         }
+      } else {
+        // Sem o link do Claude por trás (arquivo aberto direto de uma pasta
+        // de rede/servidor): cada navegador só vê a própria cópia até o
+        // arquivo em si ser substituído. Deixa isso muito claro em vez de um
+        // toast que desaparece em 5 segundos.
+        toast('Planilha lida com sucesso.', 'ok');
+        showSaveBanner('Planilha lida. Agora clique em <strong>Salvar arquivo</strong> e, se possível, salve direto por cima do arquivo antigo na pasta de rede — só assim quem mais abrir o painel vê os dados novos.');
       }
-
-      const ghConfigured = !!loadGithubConfig();
-      if (ghConfigured) {
-        btn.textContent = 'Publicando no GitHub…';
-        const ghResult = await publishToGitHub(buildFileWithData(parsed));
-        messages.push(ghResult.message || 'Falha ao publicar no GitHub.');
-        if (ghResult.ok === false) tone = 'err';
-      }
-
-      if (!artifact && !ghConfigured) {
-        messages.push('Painel atualizado nesta tela e salvo neste navegador. Para que outras pessoas vejam sem precisar do arquivo, configure a publicação automática no GitHub (⚙ acima) ou clique em "Salvar arquivo" e suba manualmente.');
-      }
-
-      toast(messages.join(' '), tone);
     } catch (err) {
       console.error(err);
       if (err && (err.code === 'not_granted' || err.code === 'not_writer')) {
@@ -1359,19 +1372,47 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
     }
   });
 
-  // "Salvar arquivo" — downloads a fresh copy of this same page with the
-  // current data baked in, so the person can overwrite the file on their
-  // computer (or the copy hosted on GitHub) and have it open already updated
-  // next time, with no dependency on this browser's storage.
+  // "Salvar arquivo" — grava uma cópia fresca desta mesma página, com os
+  // dados atuais já embutidos, por cima do arquivo antigo. Em navegadores que
+  // suportam a File System Access API (Chrome/Edge), isso abre uma caixa de
+  // diálogo "Salvar como" onde você pode apontar direto para o arquivo antigo
+  // na pasta de rede e sobrescrevê-lo num único passo — sem precisar depois
+  // mover nada da pasta de Downloads. Em navegadores sem esse suporte (ou se
+  // a gravação direta falhar), cai para um download normal e pede para mover
+  // o arquivo manualmente.
   saveBtn.addEventListener('click', async () => {
     saveBtn.disabled = true;
     try {
       const artifact = await getArtifactCapability();
       if (artifact) {
         toast('Aqui dentro do Claude as atualizações já são publicadas automaticamente no link ao clicar em "Atualizar planilha" — não é necessário salvar um arquivo separado.', 'ok');
+        saveBanner.hidden = true;
         return;
       }
       const newHtml = buildFileWithData(currentData);
+
+      if (typeof window.showSaveFilePicker === 'function') {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: suggestedFileName(),
+            types: [{ description: 'Página HTML', accept: { 'text/html': ['.html', '.htm'] } }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(newHtml);
+          await writable.close();
+          toast('Arquivo salvo. Se você escolheu o arquivo antigo na pasta de rede, quem mais abrir o painel já vai ver os dados novos (após recarregar a página).', 'ok');
+          saveBanner.hidden = true;
+          return;
+        } catch (pickerErr) {
+          if (pickerErr && pickerErr.name === 'AbortError') {
+            // A pessoa cancelou a caixa de diálogo — deixa o aviso no ar.
+            return;
+          }
+          // Picker indisponível para esta página (sem permissão do navegador,
+          // política da empresa, etc.) — cai para o download comum abaixo.
+        }
+      }
+
       const blob = new Blob([newHtml], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1381,10 +1422,11 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
-      toast('Arquivo baixado com os dados atuais. Substitua o arquivo antigo por este para não perder a atualização.', 'ok');
+      toast('Arquivo baixado com os dados atuais. Mova-o para a pasta de rede e substitua o arquivo antigo por este.', 'ok');
+      showSaveBanner('Arquivo baixado na pasta de Downloads. Agora <strong>mova-o para a pasta de rede</strong> e substitua o arquivo antigo — só assim quem mais abrir o painel vê os dados novos.');
     } catch (err) {
       console.error(err);
-      toast('Não consegui baixar o arquivo automaticamente. Você ainda pode usar Ctrl+S (ou Cmd+S) no navegador para salvar esta página.', 'err');
+      toast('Não consegui salvar o arquivo automaticamente. Você ainda pode usar Ctrl+S (ou Cmd+S) no navegador para salvar esta página.', 'err');
     } finally {
       saveBtn.disabled = false;
     }
